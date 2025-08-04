@@ -26,7 +26,7 @@ resource "aws_instance" "jenkins_instance" {
     instance_type =var.instances_type
     key_name =  var.key_name
     user_data = file("jenkins-installation.sh")
-    security_groups = [ aws_security_group_ci_cd_sg.name ]
+    security_groups = [aws_security_group.s_group.name]
 
     tags = {
         Name = "JenkinsInstance"
@@ -47,7 +47,7 @@ resource "aws_instance" "app_deployment" {
     instance_type = var.instances_type
     key_name = var.key_name
     user_data = file("docker-insallation.sh")
-    security_groups = [ aws_security_group_ci_cd_sg.name ]
+    security_groups = [aws_security_group.s_group.name]
 
     tags = {
         Name = "AppDeploymentInstance"
