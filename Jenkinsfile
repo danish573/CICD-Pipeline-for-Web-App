@@ -3,12 +3,13 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'dkhan573/myapp:latest'
+        EC2_HOST = 'ec2-user@<APP-EC2-PUBLIC-IP>'
     }
 
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/danish573/CICD-Pipeline-for-Web-App.git'
+                git 'https://github.com/yourusername/your-repo.git'
             }
         }
 
@@ -34,7 +35,13 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sshagent(['ec2-ssh-key']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@<EC2-PUBLIC-IP> "docker pull $DOCKER_IMAGE && docker run -d -p 80:5000 $DOCKER_IMAGE"'
+                    sh """
+                        ssh -o StrictHostKeyChecking=no $EC2_HOST << EOF
+                            docker rm -f flask-container || true
+                            docker pull $DOCKER_IMAGE
+                            docker run -d --name flask-container -p 5000:5000 $DOCKER_IMAGE
+                        EOF
+                    """
                 }
             }
         }
