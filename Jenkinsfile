@@ -40,7 +40,7 @@ pipeline {
                             docker rm -f flask-container || true
                             docker pull $DOCKER_IMAGE
                             docker run -d --name flask-container -p 5000:5000 $DOCKER_IMAGE
-                        EOF
+         EOF
                     """
                 }
             }
