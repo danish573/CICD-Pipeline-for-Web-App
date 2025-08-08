@@ -36,11 +36,11 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-key']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no $EC2_HOST << EOF
-                            docker rm -f flask-container || true
-                            docker pull $DOCKER_IMAGE
-                            docker run -d --name flask-container -p 5000:5000 $DOCKER_IMAGE
-         EOF
+ssh -o StrictHostKeyChecking=no $EC2_HOST << EOF
+docker rm -f flask-container || true
+docker pull $DOCKER_IMAGE
+docker run -d --name flask-container -p 5000:5000 $DOCKER_IMAGE
+EOF
                     """
                 }
             }
