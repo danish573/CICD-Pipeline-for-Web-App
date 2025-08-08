@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'dkhan573/myapp:latest'
-        EC2_HOST = 'ec2-user@<APP-EC2-PUBLIC-IP>'
+        EC2_HOST = 'ec2-user@54.234.27.138'
     }
 
     stages {
