@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/danish573/CICD-Pipeline-for-Web-App.git'
+                git branch: 'main', url: 'https://github.com/danish573/CICD-Pipeline-for-Web-App.git'
             }
         }
 
